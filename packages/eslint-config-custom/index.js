@@ -45,10 +45,10 @@ module.exports = {
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
-    babelOptions: {
-      presets: [require.resolve("next/babel")],
-    },
-  },
+		babelOptions: {
+			presets: [require.resolve('next/babel')],
+		},
+	},
 	plugins: ['@typescript-eslint'],
 	rules: {
 		'@next/next/no-html-link-for-pages': OFF,

@@ -1,15 +1,15 @@
-import "../styles/globals.css";
+import '../styles/globals.css';
 // include styles from the ui package
-import "ui/styles.css";
+import 'ui/styles.css';
 
 export default function RootLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-  return (
-    <html className="bg-zinc-900" lang="en">
-      <body>{children}</body>
-    </html>
-  );
+	return (
+		<html className="bg-zinc-900" lang="en">
+			<body>{children}</body>
+		</html>
+	);
 }
