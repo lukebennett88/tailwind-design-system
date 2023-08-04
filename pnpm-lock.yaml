@@ -32,6 +32,9 @@ importers:
 
   apps/docs:
     dependencies:
+      core:
+        specifier: 0.0.0
+        version: link:../../packages/core
       next:
         specifier: ^13.4.12
         version: 13.4.12(react-dom@18.2.0)(react@18.2.0)
@@ -41,9 +44,6 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
-      ui:
-        specifier: 0.0.0
-        version: link:../../packages/ui
     devDependencies:
       '@types/node':
         specifier: ^18.11.17
@@ -72,6 +72,55 @@ importers:
       tsconfig:
         specifier: 0.0.0
         version: link:../../packages/tsconfig
+      typescript:
+        specifier: ^5.1.6
+        version: 5.1.6
+
+  packages/core:
+    dependencies:
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.0
+      clsx:
+        specifier: ^2.0.0
+        version: 2.0.0
+      tailwind-merge:
+        specifier: ^1.14.0
+        version: 1.14.0
+    devDependencies:
+      '@types/react':
+        specifier: ^18.2.18
+        version: 18.2.18
+      '@types/react-dom':
+        specifier: ^18.2.7
+        version: 18.2.7
+      eslint:
+        specifier: ^8.46.0
+        version: 8.46.0
+      eslint-config-custom:
+        specifier: 0.0.0
+        version: link:../eslint-config-custom
+      postcss:
+        specifier: ^8.4.27
+        version: 8.4.27
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+      tailwind-config:
+        specifier: 0.0.0
+        version: link:../tailwind-config
+      tailwindcss:
+        specifier: ^3.3.3
+        version: 3.3.3
+      tsconfig:
+        specifier: 0.0.0
+        version: link:../tsconfig
+      tsup:
+        specifier: ^7.2.0
+        version: 7.2.0(postcss@8.4.27)(typescript@5.1.6)
       typescript:
         specifier: ^5.1.6
         version: 5.1.6
@@ -142,36 +191,6 @@ importers:
         version: 3.12.7
 
   packages/tsconfig: {}
-
-  packages/ui:
-    devDependencies:
-      '@types/react':
-        specifier: ^18.2.18
-        version: 18.2.18
-      eslint:
-        specifier: ^8.46.0
-        version: 8.46.0
-      eslint-config-custom:
-        specifier: 0.0.0
-        version: link:../eslint-config-custom
-      postcss:
-        specifier: ^8.4.27
-        version: 8.4.27
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-      tailwind-config:
-        specifier: 0.0.0
-        version: link:../tailwind-config
-      tsconfig:
-        specifier: 0.0.0
-        version: link:../tsconfig
-      tsup:
-        specifier: ^7.2.0
-        version: 7.2.0(postcss@8.4.27)(typescript@5.1.6)
-      typescript:
-        specifier: ^5.1.6
-        version: 5.1.6
 
 packages:
 
@@ -1619,6 +1638,12 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
 
+  /class-variance-authority@0.7.0:
+    resolution: {integrity: sha512-jFI8IQw4hczaL4ALINxqLEXQbWcNjoSkloa4IaufXCJr6QawJyw7tuRysRsrE8w2p/4gGaxKIt/hX3qz/IbD1A==}
+    dependencies:
+      clsx: 2.0.0
+    dev: false
+
   /client-only@0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
     dev: false
@@ -1627,6 +1652,11 @@ packages:
     resolution: {integrity: sha512-ROoL94jJH2dUVML2Y/5PEDNaSHgeOdSDicUyS7izcF63G6sTc/FTjLub4b8Il9S8S0beOfYt0TaA5qvFK+w0wA==}
     dependencies:
       mimic-response: 1.0.1
+    dev: false
+
+  /clsx@2.0.0:
+    resolution: {integrity: sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==}
+    engines: {node: '>=6'}
     dev: false
 
   /color-convert@1.9.3:
@@ -2878,6 +2908,7 @@ packages:
 
   /loose-envify@1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
+    hasBin: true
     dependencies:
       js-tokens: 4.0.0
 
@@ -3445,7 +3476,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
-    dev: false
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -3584,7 +3614,6 @@ packages:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
-    dev: false
 
   /sembear@0.5.2:
     resolution: {integrity: sha512-Ij1vCAdFgWABd7zTg50Xw1/p0JgESNxuLlneEAsmBrKishA06ulTTL/SHGmNy2Zud7+rKrHTKNI6moJsn1ppAQ==}
@@ -3824,6 +3853,10 @@ packages:
     dependencies:
       '@pkgr/utils': 2.3.1
       tslib: 2.6.1
+    dev: false
+
+  /tailwind-merge@1.14.0:
+    resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
     dev: false
 
   /tailwindcss@3.3.3:

@@ -3,7 +3,7 @@
 	"display": "Node 18",
 	"extends": "./base.json",
 	"compilerOptions": {
-		"lib": ["ES2020"],
+		"lib": ["ES2020", "DOM"],
 		"module": "commonjs",
 		"target": "ES2020"
 	}
