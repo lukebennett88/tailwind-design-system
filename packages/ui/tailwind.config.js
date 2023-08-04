@@ -1,7 +1,7 @@
-const sharedConfig = require('tailwind-config/tailwind.config.js');
+const {setmorePreset} = require('tailwind-config');
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-	// prefix ui lib classes to avoid conflicting with the app
-	prefix: 'ui-',
-	presets: [sharedConfig],
+	content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
+	presets: [setmorePreset],
 };

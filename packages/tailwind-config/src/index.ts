@@ -1,0 +1,1 @@
+export { setmorePreset } from './preset';

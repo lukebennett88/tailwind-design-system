@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import { type Metadata } from 'next';
 import { Button } from 'ui';
 
 export const metadata: Metadata = {
