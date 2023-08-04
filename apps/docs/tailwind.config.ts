@@ -6,7 +6,7 @@ export default {
 	darkMode: ['class'],
 	content: [
 		'./src/**/*.{js,ts,jsx,tsx,mdx}',
-		'./node_modules/core/**/*.{js,ts,jsx,tsx}',
+		'./node_modules/core/dist/**/*.{js,ts,jsx,tsx}',
 	],
 	theme: {
 		extend: defaultTheme,

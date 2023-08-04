@@ -1,5 +1,7 @@
 import hexRgb from 'hex-rgb';
 import { type Config } from 'tailwindcss';
+// @ts-expect-error: No types available
+import animatePlugin from 'tailwindcss-animate';
 import plugin from 'tailwindcss/plugin';
 
 import { dark } from './setmore-theme/dark';
@@ -35,6 +37,23 @@ function withOpacity(variableName: ThemeKeys) {
 	/** @see https://tailwindcss.com/docs/customizing-colors#using-css-variables */
 	return `rgba(var(--${variableName}), <alpha-value>)`;
 }
+
+const colorPlugin = plugin(function addBaseColor({ addBase }) {
+	addBase({
+		':root': {
+			...toCustomProperties(light.background, 'background'),
+			...toCustomProperties(light.border, 'border'),
+			...toCustomProperties(light.icon, 'icon'),
+			...toCustomProperties(light.text, 'text'),
+		},
+		'.dark': {
+			...toCustomProperties(dark.background, 'background'),
+			...toCustomProperties(dark.border, 'border'),
+			...toCustomProperties(dark.icon, 'icon'),
+			...toCustomProperties(dark.text, 'text'),
+		},
+	});
+});
 
 export const setmorePreset = {
 	content: [],
@@ -131,23 +150,6 @@ export const setmorePreset = {
 			tertiary: withOpacity('text-tertiary'),
 		} satisfies Record<keyof typeof light.text, string>,
 	},
-	plugins: [
-		plugin(function addBaseColor({ addBase }) {
-			addBase({
-				':root': {
-					...toCustomProperties(light.background, 'background'),
-					...toCustomProperties(light.border, 'border'),
-					...toCustomProperties(light.icon, 'icon'),
-					...toCustomProperties(light.text, 'text'),
-				},
-				'.dark': {
-					...toCustomProperties(dark.background, 'background'),
-					...toCustomProperties(dark.border, 'border'),
-					...toCustomProperties(dark.icon, 'icon'),
-					...toCustomProperties(dark.text, 'text'),
-				},
-			});
-		}),
-	],
+	plugins: [animatePlugin, colorPlugin],
 	presets: [],
 } satisfies Config;
