@@ -130,8 +130,7 @@ export const setmorePreset = {
 			),
 			'neutral-tertiary': withOpacity('background-neutral-tertiary'),
 			neutral: withOpacity('background-neutral'),
-		} satisfies Record<keyof typeof tokens.colors.light.background, string> &
-			Record<'transparent', 'transparent'>,
+		},
 		borderColor: {
 			transparent: 'transparent',
 			accent: withOpacity('border-accent'),
@@ -149,15 +148,14 @@ export const setmorePreset = {
 			input: withOpacity('border-input'),
 			secondary: withOpacity('border-secondary'),
 			tertiary: withOpacity('border-tertiary'),
-		} satisfies Record<keyof typeof tokens.colors.light.border, string> &
-			Record<'transparent', 'transparent'>,
+		},
 		fill: {
 			transparent: 'transparent',
+			current: 'currentColor',
 			primary: withOpacity('icon-primary'),
 			secondary: withOpacity('icon-secondary'),
 			tertiary: withOpacity('icon-tertiary'),
-		} satisfies Record<keyof typeof tokens.colors.light.icon, string> &
-			Record<'transparent', 'transparent'>,
+		},
 		ringColor: {
 			transparent: 'transparent',
 			accent: withOpacity('border-accent'),
@@ -175,8 +173,7 @@ export const setmorePreset = {
 			input: withOpacity('border-input'),
 			secondary: withOpacity('border-secondary'),
 			tertiary: withOpacity('border-tertiary'),
-		} satisfies Record<keyof typeof tokens.colors.light.border, string> &
-			Record<'transparent', 'transparent'>,
+		},
 		textColor: {
 			transparent: 'transparent',
 			accent: withOpacity('text-accent'),
@@ -192,8 +189,7 @@ export const setmorePreset = {
 			primary: withOpacity('text-primary'),
 			secondary: withOpacity('text-secondary'),
 			tertiary: withOpacity('text-tertiary'),
-		} satisfies Record<keyof typeof tokens.colors.light.text, string> &
-			Record<'transparent', 'transparent'>,
+		},
 	},
 	plugins: [animatePlugin, colorPlugin, highContrastPlugin],
 	presets: [],

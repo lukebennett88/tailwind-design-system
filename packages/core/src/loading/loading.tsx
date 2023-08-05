@@ -26,7 +26,7 @@ export const Loading = forwardRef<SVGSVGElement, LoadingProps>(function Loading(
 			{...consumerProps}
 			aria-hidden="true"
 			className={cn(
-				'high-contrast:border-dashed animate-spin stroke-current',
+				'high-contrast:border-dashed animate-spin border border-transparent stroke-current',
 				iconSizeLookup[size],
 				className,
 			)}
@@ -41,13 +41,21 @@ export const Loading = forwardRef<SVGSVGElement, LoadingProps>(function Loading(
 			<defs>
 				<linearGradient id={id} x1="10%" x2="80%" y1="50%" y2="80%">
 					<stop
-						className={cn(toneLookup[tone], classNames.ring)}
+						className={cn(
+							'[stop-color:currentColor]',
+							toneLookup[tone],
+							classNames.ring,
+						)}
 						offset="0%"
 						stopOpacity={0}
 						style={styles.ring}
 					/>
 					<stop
-						className={cn(toneLookup[tone], classNames.ring)}
+						className={cn(
+							'[stop-color:currentColor]',
+							toneLookup[tone],
+							classNames.ring,
+						)}
 						offset="100%"
 						stopOpacity={1}
 						style={styles.ring}
