@@ -10,9 +10,9 @@ export const buttonVariants = cva([buttonBase, ''], {
 			false: '',
 		},
 		size: {
-			small: 'h-24 px-12 text-body-3',
+			small: 'h-24 px-12 text-body-4',
 			standard: 'h-32 px-16 text-body-4',
-			large: 'h-40 px-20 text-body-4',
+			large: 'h-40 px-20 text-body-3',
 		},
 		variant: {
 			primary: '',
@@ -33,7 +33,8 @@ export const buttonVariants = cva([buttonBase, ''], {
 			variant: 'primary',
 			isDisabled: false,
 			className:
-				'bg-accent text-onPrimary hover:bg-accent-hover active:bg-accent-pressed',
+				// twMerge looks to be confusing some classes that are prefixed with "text-" that target different properties, so using arbrit
+				'bg-accent [color:rgb(var(--text-onPrimary))] hover:bg-accent-hover active:bg-accent-pressed',
 		},
 		{
 			variant: 'tertiary',
@@ -45,7 +46,8 @@ export const buttonVariants = cva([buttonBase, ''], {
 			isDisabled: false,
 			className:
 				// bg-accent-tertiary doesn't work for dark mode so using neutral instead
-				'bg-neutral text-accent hover:bg-accent-tertiary-hover active:bg-accent-tertiary-pressed',
+				// twMerge looks to be confusing some classes that are prefixed with "text-" that target different properties, so using arbitrary value syntax
+				'bg-neutral [color:rgb(var(--text-accent))] hover:bg-accent-tertiary-hover active:bg-accent-tertiary-pressed',
 		},
 		{
 			variant: 'neutralSecondary',
@@ -56,7 +58,8 @@ export const buttonVariants = cva([buttonBase, ''], {
 			variant: 'neutralSecondary',
 			isDisabled: false,
 			className:
-				'bg-neutral text-primary border-secondary hover:bg-neutral-hover active:bg-neutral-pressed',
+				// twMerge looks to be confusing some classes that are prefixed with "text-" that target different properties, so using arbrit
+				'bg-neutral [color:rgb(var(--text-primary))] border-secondary hover:bg-neutral-hover active:bg-neutral-pressed',
 		},
 		{
 			variant: 'neutralTertiary',
@@ -67,7 +70,8 @@ export const buttonVariants = cva([buttonBase, ''], {
 			variant: 'neutralTertiary',
 			isDisabled: false,
 			className:
-				'bg-tertiary text-secondary hover:bg-tertiary-hover active:bg-tertiary-pressed',
+				// twMerge looks to be confusing some classes that are prefixed with "text-" that target different properties, so using arbrit
+				'bg-tertiary [color:rgb(var(--text-secondary))] hover:bg-tertiary-hover active:bg-tertiary-pressed',
 		},
 		{
 			variant: 'criticalPrimary',
@@ -78,7 +82,8 @@ export const buttonVariants = cva([buttonBase, ''], {
 			variant: 'criticalPrimary',
 			isDisabled: false,
 			className:
-				'bg-critical text-onPrimary hover:bg-critical-hover active:bg-critical-pressed',
+				// twMerge looks to be confusing some classes that are prefixed with "text-" that target different properties, so using arbrit
+				'bg-critical [color:rgb(var(--text-onPrimary))] hover:bg-critical-hover active:bg-critical-pressed',
 		},
 		{
 			variant: 'criticalTertiary',
@@ -89,7 +94,8 @@ export const buttonVariants = cva([buttonBase, ''], {
 			variant: 'criticalTertiary',
 			isDisabled: false,
 			className:
-				'bg-critical-tertiary text-primary hover:bg-critical-tertiary-hover active:bg-critical-tertiary-pressed',
+				// twMerge looks to be confusing some classes that are prefixed with "text-" that target different properties, so using arbrit
+				'bg-critical-tertiary [color:rgb(var(--text-primary))] hover:bg-critical-tertiary-hover active:bg-critical-tertiary-pressed',
 		},
 	],
 });
