@@ -1,5 +1,7 @@
 import { forwardRef } from 'react';
 
+import { cn } from '../lib/utils';
+import { textVariants } from './styles';
 import { type PolymorphicText } from './types';
 
 /**
@@ -11,20 +13,35 @@ import { type PolymorphicText } from './types';
 
 export const Text = forwardRef(function Text(
 	{
-		textAlign,
 		as: RootEl = 'span',
-		// classNames = {},
+		className,
+		fontWeight,
 		lineClamp,
-		// styles = {},
-		// sx: overrides = {},
 		tabularNumbers,
-		// textTransform,
-		// tone,
-		// typography = 'body.2',
-		// fontWeight,
+		textAlign,
+		textTransform,
+		tone,
+		typography = 'body-2',
 		...consumerProps
 	},
 	forwardedRef,
 ) {
-	return <RootEl {...consumerProps} ref={forwardedRef} />;
+	return (
+		<RootEl
+			{...consumerProps}
+			className={cn(
+				textVariants({
+					fontWeight,
+					lineClamp,
+					tabularNumbers,
+					textAlign,
+					textTransform,
+					tone,
+					typography,
+				}),
+				className,
+			)}
+			ref={forwardedRef}
+		/>
+	);
 }) as PolymorphicText;

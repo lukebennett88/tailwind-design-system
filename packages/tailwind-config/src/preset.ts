@@ -66,16 +66,34 @@ const highContrastPlugin = plugin(function addHighContrast({ addVariant }) {
 	);
 });
 
+function mapTypography({
+	prefix,
+	typographyKey,
+}: {
+	typographyKey: Record<
+		string,
+		{
+			fontSize: string;
+			fontWeight: string;
+			lineHeight: string;
+			letterSpacing: string;
+		}
+	>;
+	prefix: string;
+}) {
+	return Object.fromEntries(
+		Object.entries(typographyKey).map(([key, { fontSize, ...rest }]) => [
+			`${prefix}-${key}`,
+			[pxToRem(fontSize), rest],
+		]),
+	) satisfies NonNullable<Config['theme']>['fontSize'];
+}
+
 export const setmorePreset = {
 	content: [],
 	theme: {
 		...defaultTheme,
-		spacing: Object.fromEntries(
-			Object.entries(tokens.spacing).map(([key, value]) => [
-				key,
-				pxToRem(value),
-			]),
-		),
+		// Colours
 		backgroundColor: {
 			transparent: 'transparent',
 			'accent-hover': withOpacity('background-accent-hover'),
@@ -189,6 +207,24 @@ export const setmorePreset = {
 			primary: withOpacity('text-primary'),
 			secondary: withOpacity('text-secondary'),
 			tertiary: withOpacity('text-tertiary'),
+		},
+		// Spacing
+		spacing: Object.fromEntries(
+			Object.entries(tokens.spacing).map(([key, value]) => [
+				key,
+				pxToRem(value),
+			]),
+		),
+		// Typography
+		fontSize: {
+			...mapTypography({
+				prefix: 'heading',
+				typographyKey: tokens.typography.heading,
+			}),
+			...mapTypography({
+				prefix: 'body',
+				typographyKey: tokens.typography.text,
+			}),
 		},
 	},
 	plugins: [animatePlugin, colorPlugin, highContrastPlugin],

@@ -10,9 +10,9 @@ export const buttonVariants = cva([buttonBase, ''], {
 			false: '',
 		},
 		size: {
-			small: 'h-24 px-12',
-			standard: 'h-32 px-16',
-			large: 'h-40 px-20',
+			small: 'h-24 px-12 text-body-3',
+			standard: 'h-32 px-16 text-body-4',
+			large: 'h-40 px-20 text-body-4',
 		},
 		variant: {
 			primary: '',

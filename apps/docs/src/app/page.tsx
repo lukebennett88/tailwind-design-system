@@ -1,6 +1,6 @@
 import { type Metadata } from 'next';
 
-import { Button, type ButtonProps } from '../components';
+import { Button, type ButtonProps } from '../components/core';
 
 export const metadata = {
 	title: 'Docs',
@@ -26,7 +26,7 @@ const loadingStates = [false, true] satisfies Array<ButtonProps['isLoading']>;
 export default function Home() {
 	return (
 		<main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-16">
-			<h1 className="text-4xl font-bold">Buttons</h1>
+			<h1 className="text-heading-1 font-bold">Buttons</h1>
 			<ul className="grid grid-cols-3 items-center gap-8 md:grid-cols-4 lg:grid-cols-6">
 				{variants.map(
 					(variant) =>
