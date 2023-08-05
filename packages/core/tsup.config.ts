@@ -1,7 +1,7 @@
-import { defineConfig, Options } from 'tsup';
+import { defineConfig, type Options } from 'tsup';
 
 export default defineConfig((options: Options) => ({
-	entry: ['src/**/*.ts'],
+	entry: ['src/index.ts'],
 	format: ['cjs', 'esm'],
 	external: ['react'],
 	dts: true,

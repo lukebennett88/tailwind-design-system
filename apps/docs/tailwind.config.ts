@@ -1,6 +1,5 @@
 import { setmorePreset } from 'tailwind-config';
-import { Config } from 'tailwindcss';
-import defaultTheme from 'tailwindcss/defaultTheme';
+import { type Config } from 'tailwindcss';
 
 export default {
 	darkMode: ['class'],
@@ -8,8 +7,5 @@ export default {
 		'./src/**/*.{js,ts,jsx,tsx,mdx}',
 		'./node_modules/core/dist/**/*.{js,ts,jsx,tsx}',
 	],
-	theme: {
-		extend: defaultTheme,
-	},
 	presets: [setmorePreset],
 } satisfies Config;

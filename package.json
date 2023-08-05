@@ -3,8 +3,10 @@
 	"private": true,
 	"scripts": {
 		"build": "turbo build",
+		"build:packages": "turbo run build --filter=./packages/*",
 		"clean": "turbo clean",
 		"dev": "turbo dev",
+		"dev:packages": "turbo run dev --filter=./packages/*",
 		"fix": "pnpm fix:lint && pnpm fix:format",
 		"fix:format": "pnpm format --write",
 		"fix:lint": "turbo run lint -- --fix",

@@ -2,16 +2,22 @@
 	"name": "core",
 	"version": "0.0.0",
 	"license": "MIT",
-	"exports": {
-		".": "./dist"
-	},
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
+	"files": [
+		"dist/**"
+	],
 	"scripts": {
 		"build": "tsup",
-		"check-types": "tsc --noEmit",
-		"dev": "tsup --watch"
+		"check:types": "tsc --noEmit",
+		"clean": "pnpm clean:outputs && rm -rf node_modules",
+		"clean:outputs": "rm -rf .turbo && rm -rf dist",
+		"dev": "tsup --watch",
+		"lint": "TIMING=1 eslint \"src/**/*.{js,ts,jsx,tsx}\" --max-warnings 0 --report-unused-disable-directives"
 	},
 	"dependencies": {
+		"@radix-ui/react-polymorphic": "^0.0.14",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.0.0",
 		"tailwind-merge": "^1.14.0"

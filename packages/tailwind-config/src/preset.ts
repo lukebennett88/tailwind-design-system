@@ -2,10 +2,10 @@ import hexRgb from 'hex-rgb';
 import { type Config } from 'tailwindcss';
 // @ts-expect-error: No types available
 import animatePlugin from 'tailwindcss-animate';
+import defaultTheme from 'tailwindcss/defaultTheme';
 import plugin from 'tailwindcss/plugin';
 
-import { dark } from './setmore-theme/dark';
-import { light } from './setmore-theme/light';
+import { tokens } from './setmore-tokens';
 
 function toCustomProperties(obj: Record<string, string>, prefix: string) {
 	return Object.fromEntries(
@@ -31,34 +31,53 @@ type KeysOfProperties<T> = {
 	[K in ObjectKeys<T>]: `${K & string}-${StringKeyof<T[K]>}`;
 }[ObjectKeys<T>];
 
-type ThemeKeys = KeysOfProperties<typeof light>;
+type ThemeKeys = KeysOfProperties<typeof tokens.colors.light>;
 
 function withOpacity(variableName: ThemeKeys) {
 	/** @see https://tailwindcss.com/docs/customizing-colors#using-css-variables */
 	return `rgba(var(--${variableName}), <alpha-value>)`;
 }
 
+function pxToRem(value: string) {
+	return `${parseFloat(value) / 16}rem`;
+}
+
 const colorPlugin = plugin(function addBaseColor({ addBase }) {
 	addBase({
 		':root': {
-			...toCustomProperties(light.background, 'background'),
-			...toCustomProperties(light.border, 'border'),
-			...toCustomProperties(light.icon, 'icon'),
-			...toCustomProperties(light.text, 'text'),
+			...toCustomProperties(tokens.colors.light.background, 'background'),
+			...toCustomProperties(tokens.colors.light.border, 'border'),
+			...toCustomProperties(tokens.colors.light.icon, 'icon'),
+			...toCustomProperties(tokens.colors.light.text, 'text'),
 		},
 		'.dark': {
-			...toCustomProperties(dark.background, 'background'),
-			...toCustomProperties(dark.border, 'border'),
-			...toCustomProperties(dark.icon, 'icon'),
-			...toCustomProperties(dark.text, 'text'),
+			...toCustomProperties(tokens.colors.dark.background, 'background'),
+			...toCustomProperties(tokens.colors.dark.border, 'border'),
+			...toCustomProperties(tokens.colors.dark.icon, 'icon'),
+			...toCustomProperties(tokens.colors.dark.text, 'text'),
 		},
 	});
+});
+
+const highContrastPlugin = plugin(function addHighContrast({ addVariant }) {
+	addVariant(
+		'high-contrast',
+		'@media (-ms-high-contrast: active), (forced-colors: active)',
+	);
 });
 
 export const setmorePreset = {
 	content: [],
 	theme: {
+		...defaultTheme,
+		spacing: Object.fromEntries(
+			Object.entries(tokens.spacing).map(([key, value]) => [
+				key,
+				pxToRem(value),
+			]),
+		),
 		backgroundColor: {
+			transparent: 'transparent',
 			'accent-hover': withOpacity('background-accent-hover'),
 			'accent-pressed': withOpacity('background-accent-pressed'),
 			'accent-secondary-hover': withOpacity(
@@ -111,8 +130,10 @@ export const setmorePreset = {
 			),
 			'neutral-tertiary': withOpacity('background-neutral-tertiary'),
 			neutral: withOpacity('background-neutral'),
-		} satisfies Record<keyof typeof light.background, string>,
+		} satisfies Record<keyof typeof tokens.colors.light.background, string> &
+			Record<'transparent', 'transparent'>,
 		borderColor: {
+			transparent: 'transparent',
 			accent: withOpacity('border-accent'),
 			focus: withOpacity('border-focus'),
 			hover: withOpacity('border-hover'),
@@ -128,13 +149,36 @@ export const setmorePreset = {
 			input: withOpacity('border-input'),
 			secondary: withOpacity('border-secondary'),
 			tertiary: withOpacity('border-tertiary'),
-		} satisfies Record<keyof typeof light.border, string>,
+		} satisfies Record<keyof typeof tokens.colors.light.border, string> &
+			Record<'transparent', 'transparent'>,
 		fill: {
+			transparent: 'transparent',
 			primary: withOpacity('icon-primary'),
 			secondary: withOpacity('icon-secondary'),
 			tertiary: withOpacity('icon-tertiary'),
-		} satisfies Record<keyof typeof light.icon, string>,
+		} satisfies Record<keyof typeof tokens.colors.light.icon, string> &
+			Record<'transparent', 'transparent'>,
+		ringColor: {
+			transparent: 'transparent',
+			accent: withOpacity('border-accent'),
+			focus: withOpacity('border-focus'),
+			hover: withOpacity('border-hover'),
+			'input-active-hover': withOpacity('border-input-active-hover'),
+			'input-active-pressed': withOpacity('border-input-active-pressed'),
+			'input-active': withOpacity('border-input-active'),
+			'input-critical-hover': withOpacity('border-input-critical-hover'),
+			'input-critical-pressed': withOpacity('border-input-critical-pressed'),
+			'input-critical': withOpacity('border-input-critical'),
+			'input-disabled': withOpacity('border-input-disabled'),
+			'input-hover': withOpacity('border-input-hover'),
+			'input-pressed': withOpacity('border-input-pressed'),
+			input: withOpacity('border-input'),
+			secondary: withOpacity('border-secondary'),
+			tertiary: withOpacity('border-tertiary'),
+		} satisfies Record<keyof typeof tokens.colors.light.border, string> &
+			Record<'transparent', 'transparent'>,
 		textColor: {
+			transparent: 'transparent',
 			accent: withOpacity('text-accent'),
 			'accent-hover': withOpacity('text-accent-hover'),
 			'accent-pressed': withOpacity('text-accent-pressed'),
@@ -148,8 +192,9 @@ export const setmorePreset = {
 			primary: withOpacity('text-primary'),
 			secondary: withOpacity('text-secondary'),
 			tertiary: withOpacity('text-tertiary'),
-		} satisfies Record<keyof typeof light.text, string>,
+		} satisfies Record<keyof typeof tokens.colors.light.text, string> &
+			Record<'transparent', 'transparent'>,
 	},
-	plugins: [animatePlugin, colorPlugin],
+	plugins: [animatePlugin, colorPlugin, highContrastPlugin],
 	presets: [],
 } satisfies Config;
