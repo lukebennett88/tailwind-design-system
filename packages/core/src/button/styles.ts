@@ -44,7 +44,8 @@ export const buttonVariants = cva([buttonBase, ''], {
 			variant: 'tertiary',
 			isDisabled: false,
 			className:
-				'bg-accent-tertiary text-primary hover:bg-accent-tertiary-hover active:bg-accent-tertiary-pressed',
+				// bg-accent-tertiary doesn't work for dark mode so using neutral instead
+				'bg-neutral text-accent hover:bg-accent-tertiary-hover active:bg-accent-tertiary-pressed',
 		},
 		{
 			variant: 'neutralSecondary',
