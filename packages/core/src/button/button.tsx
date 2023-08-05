@@ -47,23 +47,34 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 		);
 
 		return (
-			<Track
+			<button
 				{...consumerProps}
 				aria-disabled={isDisabled || undefined}
 				aria-pressed={typeof isPressed === 'boolean' ? isPressed : undefined}
-				as="button"
-				className={cn(buttonVariants({ className, size, variant }))}
-				classNames={{
-					railStart: classNames.iconStart,
-					railEnd: classNames.iconEnd,
-				}}
+				className={cn(
+					buttonVariants({
+						className,
+						isDisabled,
+						size,
+						variant,
+					}),
+				)}
 				onClick={handleOnClick}
-				railEnd={IconEnd}
-				railStart={IconStart}
 				ref={mergeRefs([internalRef, forwardedRef])}
 				type={type}
 			>
-				{children}
+				<Track
+					as="span"
+					className={isLoading ? 'opacity-0' : ''}
+					classNames={{
+						railStart: classNames.iconStart,
+						railEnd: classNames.iconEnd,
+					}}
+					railEnd={IconEnd}
+					railStart={IconStart}
+				>
+					{children}
+				</Track>
 				<span
 					aria-live="assertive"
 					className={cn(classNames.label)}
@@ -72,7 +83,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 					{isLoading ? (
 						<span
 							// aria-label={loadingLabel}
-							className={cn('inline-flex')}
+							aria-label="Busy"
+							className={cn(
+								'pointer-events-none absolute inset-0 inline-flex items-center justify-center',
+							)}
 						>
 							<Loading
 								size={iconSizeMap[size]}
@@ -81,7 +95,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 						</span>
 					) : null}
 				</span>
-			</Track>
+			</button>
 		);
 	},
 );
