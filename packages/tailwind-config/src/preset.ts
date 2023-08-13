@@ -1,4 +1,5 @@
 import hexRgb from 'hex-rgb';
+import { withTV } from 'tailwind-variants/transformer';
 import { type Config } from 'tailwindcss';
 // @ts-expect-error: No types available
 import animatePlugin from 'tailwindcss-animate';
@@ -89,7 +90,8 @@ function mapTypography({
 	) satisfies NonNullable<Config['theme']>['fontSize'];
 }
 
-export const setmorePreset = {
+export const setmorePreset = withTV({
+	darkMode: ['class'],
 	content: [],
 	theme: {
 		...defaultTheme,
@@ -229,4 +231,4 @@ export const setmorePreset = {
 	},
 	plugins: [animatePlugin, colorPlugin, highContrastPlugin],
 	presets: [],
-} satisfies Config;
+} satisfies Config);

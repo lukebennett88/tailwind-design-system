@@ -1,6 +1,7 @@
-import { cva } from 'class-variance-authority';
+import { tv } from 'tailwind-variants';
 
-export const textVariants = cva('', {
+export const getTextStyles = tv({
+	base: '',
 	variants: {
 		fontWeight: {
 			regular: 'font-[400]',

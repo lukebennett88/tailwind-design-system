@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 
 import { cn } from '../lib/utils';
-import { textVariants } from './styles';
+import { getTextStyles } from './styles';
 import { type PolymorphicText } from './types';
 
 /**
@@ -30,7 +30,7 @@ export const Text = forwardRef(function Text(
 		<RootEl
 			{...consumerProps}
 			className={cn(
-				textVariants({
+				getTextStyles({
 					fontWeight,
 					lineClamp,
 					tabularNumbers,

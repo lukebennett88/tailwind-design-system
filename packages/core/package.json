@@ -18,9 +18,9 @@
 	},
 	"dependencies": {
 		"@radix-ui/react-polymorphic": "^0.0.14",
-		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.0.0",
-		"tailwind-merge": "^1.14.0"
+		"tailwind-merge": "^1.14.0",
+		"tailwind-variants": "^0.1.13"
 	},
 	"devDependencies": {
 		"@types/react": "^18.2.18",

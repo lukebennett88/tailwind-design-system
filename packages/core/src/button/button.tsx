@@ -1,11 +1,11 @@
-import { forwardRef, useCallback, useRef } from 'react';
+import { forwardRef, useCallback, useMemo, useRef } from 'react';
 
 import { mergeRefs } from '../lib/merge-refs';
 import { cn } from '../lib/utils';
 import { Loading } from '../loading/loading';
 // import { useTranslations } from '../shared';
 import { Track } from '../track/track';
-import { buttonVariants } from './styles';
+import { getButtonStyles } from './styles';
 import { type ButtonProps } from './types';
 
 /**
@@ -32,6 +32,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 			onClick,
 			size = 'standard',
 			styles = {},
+			style,
 			type = 'button',
 			variant = 'primary',
 			...consumerProps
@@ -46,50 +47,67 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 			[isLoading, onClick],
 		);
 
+		const buttonStyles = useMemo(
+			() =>
+				getButtonStyles({
+					size,
+					variant,
+				}),
+			[size, variant],
+		);
+
 		return (
 			<button
 				{...consumerProps}
 				aria-disabled={isDisabled || undefined}
 				aria-pressed={typeof isPressed === 'boolean' ? isPressed : undefined}
-				className={cn(
-					buttonVariants({
-						className,
-						isDisabled,
-						size,
-						variant,
-					}),
-				)}
+				className={cn(buttonStyles.base({ className }))}
+				data-loading={isLoading || undefined}
 				onClick={handleOnClick}
 				ref={mergeRefs([internalRef, forwardedRef])}
+				style={style}
 				type={type}
 			>
 				<Track
 					as="span"
-					className={isLoading ? 'opacity-0' : ''}
+					className={cn(buttonStyles.label({ className: classNames.label }))}
 					classNames={{
-						railStart: classNames.iconStart,
-						railEnd: classNames.iconEnd,
+						railStart: cn(
+							buttonStyles.iconStart({ className: classNames.iconStart }),
+						),
+						railEnd: cn(
+							buttonStyles.iconEnd({ className: classNames.iconEnd }),
+						),
 					}}
 					railEnd={IconEnd}
 					railStart={IconStart}
+					styles={{
+						railStart: styles.iconStart,
+						railEnd: styles.iconEnd,
+					}}
 				>
 					{children}
 				</Track>
-				<span
-					aria-live="assertive"
-					className={cn(classNames.label)}
-					style={styles.label}
-				>
+				<span aria-live="assertive">
 					{isLoading ? (
 						<span
 							// aria-label={loadingLabel}
 							aria-label="Busy"
 							className={cn(
-								'pointer-events-none absolute inset-0 inline-flex items-center justify-center',
+								buttonStyles.loadingLabel({
+									className: classNames.loadingLabel,
+								}),
 							)}
+							style={styles.loadingLabel}
 						>
 							<Loading
+								className={cn(
+									buttonStyles.loading({
+										className: classNames.loading,
+									}),
+								)}
 								size={iconSizeMap[size]}
+								style={styles.loading}
 								tone={loadingToneMap[variant]}
 							/>
 						</span>

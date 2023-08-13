@@ -1,9 +1,9 @@
-import { type VariantProps } from 'class-variance-authority';
+import { type VariantProps } from 'tailwind-variants';
 
 import { type StyleProps } from '../shared/types';
-import { type buttonVariants } from './styles';
+import { type getButtonStyles } from './styles';
 
-type Parts = 'label' | 'iconStart' | 'iconEnd' | 'loading';
+type Parts = 'label' | 'iconStart' | 'iconEnd' | 'loading' | 'loadingLabel';
 
 type NativeButtonProps = Pick<
 	React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -21,7 +21,7 @@ type NativeButtonProps = Pick<
 >;
 
 export type ButtonProps = NativeButtonProps &
-	VariantProps<typeof buttonVariants> &
+	Required<VariantProps<typeof getButtonStyles>> &
 	Partial<StyleProps<Parts>> & {
 		/** The icon to display before the buttons children. */
 		iconStart?: any /** @todo */;
